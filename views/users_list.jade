@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h3.
+        Users
+    ul
+        each user, i in userslist
+            li#users_list_item
+                a(href='#') #{user.first_name} #{user.Last_name} 
+                    

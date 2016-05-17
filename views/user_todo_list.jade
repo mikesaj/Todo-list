@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h3= title
+  
+  form#form_add_user(name='addtodo', method='post', action='/add_list')
+    // To-do-list Title
+    span Title &nbsp;
+    input(type='text', placeholder='Buy - Noodles, Toothbrush, Socks', name='title')
+    // Location
+    span Address &nbsp;
+    input(type='text', placeholder='e.g. 11 Doon Creek Street, Kitchener, ON', name='location')
+    // Additional Notes
+    span Additional Notes &nbsp;
+    input(type='text', placeholder='Aditional Notes', name='notes')
+    // Submit Button
+    button#submit_user(type='submit') Submit
