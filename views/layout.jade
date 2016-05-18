@@ -5,7 +5,13 @@ html
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:400,500', type='text/css')
     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
+
   body
     block content
 
     script(type='text/javascript', src='/javascripts/validation.js')
+    //Geo-Auto Suggestion Script
+    script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDbDbO6yO_piOMux3bXl3-A62OwsjctAIc')
+    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+    script(type='text/javascript', src='/javascripts/geo.js')
+    script(type='text/javascript', src='/javascripts/script.js')
