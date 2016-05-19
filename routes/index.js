@@ -2,26 +2,29 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 
+// Variable declaration
+var db_data;        
+var redirect_url;
+var collection_name;
+
 // MongoClient initialization
 var MongoClient = mongodb.MongoClient;
 //Mongodb Url
 var url = 'mongodb://localhost:27017/assignment_db';
 
-//table
-//var user_collection = db.collection('users');
 
 
-
+/******************************* GET METHODS *******************************/
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* To-do List Page */
+/* To-do List Page 
+Get list from DB
+*/
 router.get('/thelist', function(req,res) {
-  //var MongoClient = mongodb.MongoClient;
-  //var url = 'mongodb://localhost:27017/assignment_db';
   MongoClient.connect(url, function(err,db) {
    
     if(err){
@@ -59,24 +62,26 @@ router.get('/todo_list',function (req,res) {
 router.get('/newuser',function (req,res) {
   res.render('newuser', {title: 'Add User'});
 });
+/******************************* END OF GET METHODS *******************************/
 
 
 
-/******************************* POST REQUEST *******************************/
+/******************************* POST METHODS *******************************/
 
 /* Add_list
 Routing post request for '/add_list' link route */
 router.post('/add_list', function(req, res) {
 
   /* Json data */
-  var db_data = { 
+  db_data = { 
     title: req.body.title, 
     location:req.body.location, 
     notes:req.body.notes, 
   };
         
-  var redirect_url = "final";
-  insert_into_db(db_data, redirect_url);
+  redirect_url = "final";
+  collection_name = "todo_list";
+  insert_into_db(db_data, collection_name, redirect_url, req, res);
   
 });
 
@@ -84,22 +89,24 @@ router.post('/add_list', function(req, res) {
 Routing post request for '/adduser' link route */
 router.post('/adduser', function(req, res) {
 
-  // Json data 
-  var db_data = { 
+  // JSON data 
+  db_data = { 
     first_name: req.body.first_name, 
     Last_name:req.body.last_name 
   };
         
-  var redirect_url = "todo_list";
-  insert_into_db(db_data, redirect_url, req, res);
+  redirect_url = "todo_list";
+  collection_name = "users";
+  insert_into_db(db_data, collection_name, redirect_url, req, res);
   
 });
 
 /******************************* END OF POST REQUEST *******************************/
 
 
-//Insert to db function
-function insert_into_db(db_data, redirect_url, req, res){
+/******************************* INSERT TO DB FUNCTION *******************************/
+function insert_into_db(db_data, collection_name, redirect_url, req, res)
+{
   //MongoDB connection function
   MongoClient.connect(url, function(err,db) {  
     
@@ -108,9 +115,10 @@ function insert_into_db(db_data, redirect_url, req, res){
    }
    else{
       console.log('Connected to the server');
-      //insert statement into mongodb
-      var user_collection = db.collection('users');
-      user_collection.insert([db_data], function (err,result) {
+      //Initialize Collection
+      var collection = db.collection(collection_name);
+      //Insert Statement into mongodb
+      collection.insert([db_data], function (err,result) {
         
         if(err){
           console.log(err);
@@ -124,6 +132,7 @@ function insert_into_db(db_data, redirect_url, req, res){
   });
    
 }
+/******************************* END OF DB INSERT FUNCTION *******************************/
 
 
 module.exports = router;

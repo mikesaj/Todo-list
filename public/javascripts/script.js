@@ -8,6 +8,9 @@ $.log = function(message){
         $("#location").geocomplete()
           .bind("geocode:result", function(event, result){
             $.log("Result: " + result.formatted_address);
+            
+            console.log("Lat: " + event.latLng);
+            console.log("Long: " + result.lng);
           })
           .bind("geocode:error", function(event, status){
             $.log("ERROR: " + status);
@@ -17,12 +20,12 @@ $.log = function(message){
           });
         
         $("#find").click(function(){
-          $("#geocomplete").trigger("geocode");
+          $("#location").trigger("geocode");
         });
         
         
         $("#examples a").click(function(){
-          $("#geocomplete").val($(this).text()).trigger("geocode");
+          $("#location").val($(this).text()).trigger("geocode");
           return false;
         });
         
