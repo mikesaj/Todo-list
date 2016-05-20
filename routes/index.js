@@ -7,6 +7,7 @@ var mongodb = require('mongodb');
 var db_data;        
 var redirect_url;
 var collection_name;
+var _id;
 
 // MongoClient initialization
 var MongoClient = mongodb.MongoClient;
@@ -56,7 +57,7 @@ router.get('/thelist', function(req,res) {
 /* Route: todo_list
 Routing get request for '/todo_list' link route */
 router.get('/todo_list',function (req,res) {
-  res.render('new_todo', {title: 'Todo List'});
+  res.render('new_todo', {title: 'Todo List', id : _id});
 });
 
 /* Route: newuser
@@ -177,6 +178,10 @@ function insert_into_db(req, res)
       var collection = db.collection(collection_name);
       //Insert Statement into mongodb
       collection.insert([db_data], function (err,result) {
+      //_id of last insert record
+      _id = result.ops[0]._id;
+        //console.log();
+        
         
         if(err){
           console.log(err);
