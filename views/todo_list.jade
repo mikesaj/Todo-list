@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h3.
+        To DO List
+    ul
+        each todo, i in record
+            li#users_list_item
+                a(href='#{todo.other}') #{todo.title} | #{todo.location} 
+                    | #{todo.notes}         
+                    each t, x in todo.other
+                        | #{t.first_name} #{t.Last_name}

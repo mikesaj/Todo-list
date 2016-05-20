@@ -6,6 +6,7 @@ block content
   form#form_add_user(name='addtodo', method='post', action='/add_list')
     // To-do-list Title
     span Title &nbsp;
+    input(type='hidden', name='_id', value='xyz')
     input(type='text', placeholder='Buy - Noodles, Toothbrush, Socks', name='title')
     // Location
     span Address &nbsp;
