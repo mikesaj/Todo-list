@@ -63,7 +63,7 @@ router.get('/todo_list',function (req,res) {
 /* Route: newuser
 Routing get request for '/newuser' link route */
 router.get('/newuser',function (req,res) {
-  res.render('newuser', {title: 'Add User'});
+  res.render('signup', {title: 'Add User'});
 });
 
 /* Route: users_list
