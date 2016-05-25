@@ -11,9 +11,15 @@ html
     script(src='/javascripts/jquery.js')
     // Bootstrap Core JavaScript
     script(src='/javascripts/bootstrap.min.js')
-    script(src='/javascripts/validation.min.js')
+    script(src='/javascripts/validation.js')
 
   body
      include header
+     .container
+      .row
+        .col-xs-12
+          //Page title
+          h1= title     
+          
      block content
      include footer                    

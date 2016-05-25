@@ -132,8 +132,9 @@ router.post('/add_list', function(req, res) {
 
   /* Json data */
   db_data = { 
-    _id: req.body._id, 
+    user_id: req.body.id, 
     title: req.body.title, 
+    date:req.body.date, 
     location:req.body.location, 
     notes:req.body.notes, 
   };
