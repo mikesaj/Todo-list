@@ -9,7 +9,7 @@ block content
             .row
             .col-lg-6
 
-                    form#form_add_user(name='addtodo', method='post', action='/add_list')                                                            
+                    form#form_add_todo_item(name='add_todo_item', method='post', action='/add_list')                                                            
                         .form-group
                           // User ID primary key                                             
                           input.form-control(type='hidden', name='id', id='id', value='#{id}', placeholder='Enter things you want to do')
@@ -32,11 +32,14 @@ block content
                           // Notes
                           label Notes                                                                     
                           textarea.form-control(type='text', placeholder='Aditional Notes', name='notes', id='notes')
-                                                
-                          br
-                                                
+                          
+                          br                      
                           button.btn.btn-default(type='submit') Add
-
+                                                
+                          
+                          //feedback label
+                          label#feedback Saved
+                          
             .col-lg-6
                   .panel.panel-default
                    .panel-heading To-Do List

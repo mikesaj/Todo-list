@@ -63,7 +63,7 @@ router.get('/todo_list',function (req,res) {
 /* Route: newuser
 Routing get request for '/newuser' link route */
 router.get('/newuser',function (req,res) {
-  res.render('signup', {title: 'Add User'});
+  res.render('signup', {title: 'User Registration'});
 });
 
 /* Route: users_list
@@ -82,7 +82,10 @@ router.get('/final',function (req,res) {
       var collection = db.collection('todo_list');
       //var collection = db.collection('users');
       
-collection.aggregate([{
+collection.aggregate([
+   {$sort: {_id: -1}},
+  {$limit: 1},
+  {
   $lookup:{
     from: "users",
     localField: "_id",
@@ -90,14 +93,7 @@ collection.aggregate([{
     as: "other"    
    }
   }],function(err, result){
-    //console.log(" Rice "+result.length);
-    //console.dir(result);
-  //});
-      
-      
-      
-      //collection.find({}).toArray(function(err, result){
-
+    
         if (err){
           res.send(err);
         }
@@ -120,6 +116,15 @@ collection.aggregate([{
 });
 
 
+/* Route: Json_data
+Routing Get request for '/get_json' link route */
+router.get('/get_json', function(req, res) {
+        
+  collection_name = "todo_list";
+  get_json_data_from_db(req, res);
+  
+});
+
 
 /******************************* END OF GET METHODS *******************************/
 
@@ -130,20 +135,37 @@ collection.aggregate([{
 Routing post request for '/add_list' link route */
 router.post('/add_list', function(req, res) {
 
+
+var Db = require('mongodb').Db,
+    MongoClient = require('mongodb').MongoClient,
+    Server = require('mongodb').Server,
+    ReplSetServers = require('mongodb').ReplSetServers,
+    ObjectID = require('mongodb').ObjectID,
+    Binary = require('mongodb').Binary,
+    GridStore = require('mongodb').GridStore,
+    Grid = require('mongodb').Grid,
+    Code = require('mongodb').Code,
+    assert = require('assert');
+
+// Create a new ObjectID
+var objectId = new ObjectID(req.body.id);
+
+
   /* Json data */
   db_data = { 
-    user_id: req.body.id, 
+    user_id: objectId,//req.body.id, 
     title: req.body.title, 
     date:req.body.date, 
     location:req.body.location, 
     notes:req.body.notes, 
   };
         
-  redirect_url = "final";
+  redirect_url = "get_json";//"final";
   collection_name = "todo_list";
   insert_into_db(req, res);
   
 });
+
 
 /* Route: Add User
 Routing post request for '/adduser' link route */
@@ -197,6 +219,46 @@ function insert_into_db(req, res)
    
 }
 /******************************* END OF DB INSERT FUNCTION *******************************/
+
+
+/******************************* Get Json_data FROM DB FUNCTION *******************************/
+function get_json_data_from_db(req, res)
+{
+  //MongoDB connection function
+  MongoClient.connect(url, function(err,db) {  
+    
+   if(err){
+     console.log('Unable to connect to the server');   
+   }
+   else{
+      console.log('Connected to the server');
+      //Initialize Collection
+      var collection = db.collection(collection_name);
+      //Insert Statement into mongodb
+      collection.aggregate({
+    $lookup:{
+      from: "users",
+      localField: "user_id",
+      foreignField: "_id",
+      as: "other"    
+    }
+  }, function (err,result) {
+        
+        if(err){
+          console.log(err);
+        }
+        else{
+          var data = JSON.stringify(result)
+          //console.log(data);
+          res.json(result[0]);
+        }
+        db.close();
+      })
+   }    
+  });
+   
+}
+/******************************* END OF GET Json_data FUNCTION *******************************/
 
 
 module.exports = router;

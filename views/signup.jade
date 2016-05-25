@@ -20,23 +20,23 @@ block content
                         label First Name
                         |   
                         // Email tag                                          
-                        input.form-control(type='text', placeholder='Enter Your First Name', name='first_name')
+                        input.form-control(type='text', placeholder='Enter Your First Name', name='first_name' required)
                         br
                         // Last Name                                          
                         label Last Name
                         |                                             
-                        input.form-control(type='text', placeholder='Enter Your Last Name', name='last_name')
+                        input.form-control(type='text', placeholder='Enter Your Last Name', name='last_name' required)
                         |                                                        
                         // Password                                         
                         br
                         label Password
                         |                                             
-                        input.form-control(type='text', placeholder='Enter Password', name='password')
+                        input.form-control(type='text', placeholder='Enter Password', name='password' required)
                         |                                    
                         br
                         label Re-type Password
                         |                                             
-                        input.form-control(type='text', placeholder='Enter Password again')
+                        input.form-control(type='text', placeholder='Enter Password again' required)
                         |                                              
                         br
                         button.btn.btn-lg.btn-success.btn-block(type='submit') Save                         

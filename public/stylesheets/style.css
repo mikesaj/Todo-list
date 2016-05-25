@@ -4,6 +4,13 @@ body {
     overflow-y:scroll;
 }
 
+#feedback{
+    color: #F35353;
+    font-weight: bold;  
+    padding-left: 25px;
+    display: none;  
+}
+
 .hero-spacer {
     margin-top: 50px;
     font-family: Arial, Helvetica, sans-serif;
