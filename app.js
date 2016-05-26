@@ -1,3 +1,11 @@
+/* app.js
+* This file contains the projects roadmap 
+  i.e project libraries, routes, etc..
+
+* Assignment By:
+*  -Michael Sajuyigbe: 7434350
+*  -Dhruvkumar Patel: 7453756
+*/
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -7,8 +15,8 @@ var bodyParser = require('body-parser');
 
 var mongo = require('mongodb');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var routes = require('./routes/post_requests');
+var get_requests = require('./routes/get_requests');
 
 var app = express();
 
@@ -25,7 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use(get_requests);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

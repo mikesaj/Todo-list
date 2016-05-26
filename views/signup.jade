@@ -1,3 +1,9 @@
+//
+  * signup.jade
+  * This file conatins tag elements to add a new user into the database
+  * Assignment By:
+  *  -Michael Sajuyigbe: 7434350
+  *  -Dhruvkumar Patel: 7453756
 extends layout
 
 block content
@@ -17,9 +23,14 @@ block content
                     form#form_add_user(name='adduser', method='post', action='/adduser')
                         //New user form                                      
                         .form-group
-                        label First Name
+                        label E-mail
                         |   
                         // Email tag                                          
+                        input.form-control(type='email', placeholder='someone@someone.com', name='email' required)
+                        br
+                        label First Name
+                        |   
+                        // First tag                                          
                         input.form-control(type='text', placeholder='Enter Your First Name', name='first_name' required)
                         br
                         // Last Name                                          
@@ -28,16 +39,16 @@ block content
                         input.form-control(type='text', placeholder='Enter Your Last Name', name='last_name' required)
                         |                                                        
                         // Password                                         
-                        br
-                        label Password
-                        |                                             
-                        input.form-control(type='text', placeholder='Enter Password', name='password' required)
-                        |                                    
-                        br
-                        label Re-type Password
-                        |                                             
-                        input.form-control(type='text', placeholder='Enter Password again' required)
-                        |                                              
+                          br
+                          label Password
+                          |                                             
+                          input.form-control(type='text', placeholder='Enter Password', name='password' required)
+                          |                                    
+                          br
+                          label Re-type Password
+                          |                                             
+                          input.form-control(type='text', placeholder='Enter Password again' required)
+                          |                                              
                         br
                         button.btn.btn-lg.btn-success.btn-block(type='submit') Save                         
                         //End of form

@@ -1,4 +1,5 @@
 	/***
+   * 
 	Javascript File for Project 1
 		References
 			Chapter 9: Regular Expressions. (n.d.). Retrieved March 19, 2016, from http://eloquentjavascript.net/09_regexp.html

@@ -1,3 +1,11 @@
+/* geo_script.js
+* This file contains the projects maps script
+
+* Assignment By:
+*  -Michael Sajuyigbe: 7434350
+*  -Dhruvkumar Patel: 7453756
+*/
+
 //Geo auto complete script
 $.log = function(message){
   var $logger = $("#logger");
@@ -9,8 +17,8 @@ $.log = function(message){
           .bind("geocode:result", function(event, result){
             $.log("Result: " + result.formatted_address);
             
-            console.log("Lat: " + event.latLng);
-            console.log("Long: " + result.lng);
+            //console.log("Lat: " + event.latLng);
+            //console.log("Long: " + result.lng);
           })
           .bind("geocode:error", function(event, status){
             $.log("ERROR: " + status);
