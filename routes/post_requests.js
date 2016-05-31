@@ -62,10 +62,10 @@ var objectId = new ObjectID(req.body.id);
 });
 
 
-/* Route: todo_list
-Routing get request for '/todo_list' link route */
-router.get('/todo_list',function (req,res) {
-  res.render('new_todo', {title: 'Todo List', id : _id});
+/* Route: new_todo_Item
+Routing get request for '/new_todo_Item' link route */
+router.get('/new_todo_item',function (req,res) {
+  res.render('new_todo_item', {title: 'Add Todo Item', id : _id});
 });
 
 /* Route: Add User
@@ -79,7 +79,7 @@ router.post('/adduser', function(req, res) {
     email:req.body.email 
   };
         
-  redirect_url = "todo_list";
+  redirect_url = "new_todo_item";
   collection_name = "users";
   insert_into_db(req, res);
   

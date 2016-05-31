@@ -33,9 +33,9 @@ router.get('/', function(req, res, next) {
 });
 
 
-/* Route: newuser
-Routing get request for '/newuser' link route */
-router.get('/newuser',function (req,res) {
+/* Route: Create_Account
+Routing get request for '/Create_Account' link route */
+router.get('/Create_Account',function (req,res) {
   res.render('signup', {title: 'User Registration'});
 });
 
