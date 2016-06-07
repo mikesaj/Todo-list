@@ -24,7 +24,6 @@ var MongoClient = mongodb.MongoClient;
 var url = 'mongodb://localhost:27017/assignment_db';
 
 
-
 /* 
 Route: index
 GET home page. */
