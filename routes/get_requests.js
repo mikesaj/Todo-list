@@ -38,6 +38,27 @@ router.get('/Create_Account',function (req,res) {
   res.render('signup', {title: 'User Registration'});
 });
 
+
+/* Route: Sign_In
+Routing get request for '/Sign_In' link route */
+router.get('/Sign_In',function (req,res) {
+  res.render('signin', {title: 'Sign In'});
+});
+
+
+/* Route: Profile
+Routing get request for '/Profile' link route */
+router.get('/Profile',function (req,res) {
+  res.render('profile', {title: 'Profile Page'});
+});
+
+
+/* Route: Details
+Routing get request for '/Details' link route */
+router.get('/map',function (req,res) {
+  res.render('details', {title: 'Todo Event'});
+});
+
 /* Route: Json_data
 Routing Get request for '/get_json' link route */
 router.get('/get_json', function(req, res) {

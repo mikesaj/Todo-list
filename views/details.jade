@@ -1,0 +1,29 @@
+
+extends layout
+
+block content
+    
+    .container
+      
+                   
+      hr
+      // Title
+      .row
+        .col-lg-6
+                  .panel.panel-default
+                   .panel-heading Location
+                    //Adding Google map API for display location
+                   .panel-body
+                    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div style='overflow:hidden;height:400px;width:520px;'><div id='gmap_canvas' style='height:400px;width:520px;'></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div> <a href='https://add-map.com/'>google map embed</a> <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=4fea731f6f78ffd1e1462fe5d2d8276e4c308c0f'></script><script type='text/javascript'>function init_map(){var myOptions = {zoom:12,center:new google.maps.LatLng(43.4236,-80.48000000000002),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(43.4236,-80.48000000000002)});infowindow = new google.maps.InfoWindow({content:'<strong>Conestoga College</strong><br>299 Doon Valley Dr<br>N2G 4M4 Kitchener<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+                    
+        .col-lg-6
+                  .panel.panel-default
+                   .panel-heading Details
+                    //Display details about to-do list
+                   .panel-body
+                    P TASK:
+                    hr
+                    P DATE/TIME:
+                    hr
+                    P LOCATION:
+                    hr

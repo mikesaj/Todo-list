@@ -10,6 +10,47 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 
+// session function
+var session = require("./session.js");
+
+
+
+ // -- var recd = session.username_exist("michael@microsoft.com");
+
+// define our function with the callback argument
+function some_function(sess, callback) {
+
+	// pass our result
+	return callback(sess.username_exist("michael@microsoft.com"));
+}
+
+
+// call the function
+	// this anonymous function will run when the
+	// callback is called
+ some_function(session, function(num) {
+	console.log("callback called! " + num);
+  return num;
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Variable declaration
 var db_data;        
@@ -29,21 +70,21 @@ var url = 'mongodb://localhost:27017/assignment_db';
 Routing post request for '/add_list' link route */
 router.post('/add_list', function(req, res) {
 
-//This imports several mongodb libraries
-var Db = require('mongodb').Db,
-    MongoClient = require('mongodb').MongoClient,
-    Server = require('mongodb').Server,
-    ReplSetServers = require('mongodb').ReplSetServers,
-    ObjectID = require('mongodb').ObjectID,
-    Binary = require('mongodb').Binary,
-    GridStore = require('mongodb').GridStore,
-    Grid = require('mongodb').Grid,
-    Code = require('mongodb').Code,
-    assert = require('assert');
+  //This imports several mongodb libraries
+  var Db = require('mongodb').Db,
+      MongoClient = require('mongodb').MongoClient,
+      Server = require('mongodb').Server,
+      ReplSetServers = require('mongodb').ReplSetServers,
+      ObjectID = require('mongodb').ObjectID,
+      Binary = require('mongodb').Binary,
+      GridStore = require('mongodb').GridStore,
+      Grid = require('mongodb').Grid,
+      Code = require('mongodb').Code,
+      assert = require('assert');
 
 
-// Create a new ObjectID
-var objectId = new ObjectID(req.body.id);
+  // Create a new ObjectID
+  var objectId = new ObjectID(req.body.id);
 
 
   /* Json data */

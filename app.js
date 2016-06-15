@@ -10,14 +10,21 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+
+// Cookie/Session initialization
 var cookieParser = require('cookie-parser');
+var session = require('express-session')
+
 var bodyParser = require('body-parser');
 
+// MongoDB initialization
 var mongo = require('mongodb');
 
+// Project routes definition
 var routes = require('./routes/post_requests');
 var get_requests = require('./routes/get_requests');
 
+// Express framework initialization
 var app = express();
 
 // view engine setup
@@ -31,6 +38,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Session global visibility
+app.use(session({
+  secret: 'klu34$^hli$#hyb4*387693#42y8o7bf',
+  resave: true,
+  saveUninitialized: true
+}));
+
 
 app.use('/', routes);
 app.use(get_requests);
