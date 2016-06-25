@@ -1,50 +1,42 @@
-//
-  * new_todo.jade
-  * This file conatins tag elements to add a new todo item for this project
-  * Assignment By:
-  *  -Michael Sajuyigbe: 7434350
-  *  -Dhruvkumar Patel: 7453756
 extends layout
 
 block content
     
     .container
-    
+      
+      hr
+      // Title
       .row
         .panel-body
             .row
             .col-lg-6
-
-                    form#form_add_todo_item(name='add_todo_item', method='post', action='/add_list')                                                            
+                    //To-do list detail form
+                    form#form_add_todo_item(name='add_todo_item', method='post', action='/add_list')   
+                                                            
                         .form-group
-                          // User ID primary key                                             
-                          input.form-control(type='hidden', name='id', id='id', value='#{id}', placeholder='Enter things you want to do')
-                          br
-                          //Title
-                          label Title                                                                     
-                          input.form-control(type='text', placeholder='Buy - Noodles, Toothbrush, Socks', name='title', id='title', required)
-
-                          br
-                          //Date                                             
-                          label Date
-                          input.form-control(type='date' placeholder='Select Date/Time', name='date', id='date' required)
-                                                                                                          
-                          br
-                          //Location
-                          label Location                                                                     
-                          input.form-control(type='text', placeholder='e.g. 11 Doon Creek Street, Kitchener, ON', id='location' name='location', required)
-                          
-                          br
-                          // Notes
-                          label Notes                                                                     
-                          textarea.form-control(type='text', placeholder='Aditional Notes', name='notes', id='notes')
-                          
-                          br                      
-                          button.btn.btn-warning(type='submit') Add
-                                                
-                          
-                          //feedback label
-                          label#feedback Saved
+                        label Task
+                        |                                             
+                        input.form-control(type='text', placeholder='Buy - Noodles, Toothbrush, Socks', name='title', id='title', required)
+                        input.form-control(type='hidden', name='id', id='id', value='#{user_data.id}')
+                        br
+                        label Date/Time
+                        |                                             
+                        input.form-control(type='date' placeholder='Select Date/Time', name='date', id='date' required)
+                        |                                                        
+                        br
+                        label Location
+                        |                                             
+                        input.form-control(type='text', placeholder='e.g. 11 Doon Creek Street, Kitchener, ON', id='location' name='location', required)
+                        br
+                        // Notes
+                        label Notes                                                                     
+                        textarea.form-control(type='text', placeholder='Aditional Notes', name='notes', id='notes')                                              
+                        br
+                                               
+                        button.btn.btn-warning(type='submit') Add
+                         
+                        //feedback label
+                        label#feedback Saved
                           
             .col-lg-6
                   .panel.panel-default
@@ -52,10 +44,10 @@ block content
 
                    .panel-body
                     .list-group#todo_list
-                       //a.list-group-item(href='#')
-                        i.fa.fa-money.fa-fw
-                        |  Payment Received
-                        |                                     
-                        span.pull-right.text-muted.small
-                            em Yesterday      
-                        |
+                        each todo_item, i in todo_list
+                            a.list-group-item(href='#')
+                                i.fa.fa-money.fa-fw
+                                |  #{todo_item.title}
+                                |                                     
+                                span.pull-right.text-muted.small
+                                    em #{todo_item.date}

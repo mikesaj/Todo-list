@@ -11,44 +11,7 @@ var router = express.Router();
 var mongodb = require('mongodb');
 
 // session function
-var session = require("./session.js");
-
-
-
- // -- var recd = session.username_exist("michael@microsoft.com");
-
-// define our function with the callback argument
-function some_function(sess, callback) {
-
-	// pass our result
-	return callback(sess.username_exist("michael@microsoft.com"));
-}
-
-
-// call the function
-	// this anonymous function will run when the
-	// callback is called
- some_function(session, function(num) {
-	console.log("callback called! " + num);
-  return num;
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var session_model = require("./session.js");
 
 
 
@@ -103,10 +66,62 @@ router.post('/add_list', function(req, res) {
 });
 
 
-/* Route: new_todo_Item
-Routing get request for '/new_todo_Item' link route */
-router.get('/new_todo_item',function (req,res) {
-  res.render('new_todo_item', {title: 'Add Todo Item', id : _id});
+/* Route: dashboard
+Routing get request for '/dashboard' link route */
+router.get('/dashboard',function (req,res) {
+
+
+    var id = req.session.user_data.id;
+
+    session_model.get_todo_list(id, function(result) {
+      // Get current user todo list json array
+      res.render('new_todo_item', {title: 'Add Todo Item', todo_list: result, user_data : req.session.user_data});
+    });
+});
+
+
+/* Route: Sign_In
+Routing get request for '/Sign_In' link route */
+router.post('/profile',function (req,res) {
+  
+  /* Json data */
+
+email = req.body.email;
+
+
+
+  session_model.login(email, function(result) {
+    
+    // Get the lenght of the result
+    var resultLen = Object.keys(result).length;
+
+    // Check if result has data
+    if(resultLen > 0){
+        
+        var query_result = result[0];
+
+        //Session Data
+        var user_data = {
+          id:         query_result._id,
+          first_name: query_result.first_name,  // equivalent to $_SESSION['first_name'] in PHP.
+          last_name:  query_result.last_name,   
+          email:      query_result.email              // equivalent to $_SESSION['email'] in PHP.
+        }
+
+        // Save into session 'user_data' variable 
+        req.session.user_data = user_data;
+
+        // render the user profile page
+        res.render('Profile', {title: 'Profile Page', user_data: user_data});
+    }
+    else{ 
+      // return user to sign-in page
+      res.render('signin', {title: 'Sign In'});  
+    }
+  
+  });
+
+
 });
 
 /* Route: Add User
@@ -116,7 +131,7 @@ router.post('/adduser', function(req, res) {
   // JSON data 
   db_data = { 
     first_name: req.body.first_name, 
-    Last_name:req.body.last_name, 
+    last_name:req.body.last_name, 
     email:req.body.email 
   };
         
@@ -124,6 +139,24 @@ router.post('/adduser', function(req, res) {
   collection_name = "users";
   insert_into_db(req, res);
   
+});
+
+
+/* Route: Login User
+Routing post request for '/dashboard' link route */
+router.post('/dashboard', function(req, res) {
+
+  // JSON data 
+  db_data = { 
+    email:req.body.email,
+    password:req.body.password 
+  };
+        
+  redirect_url = "new_todo_item";
+  collection_name = "users";
+
+  //session_model.get_db_data(collection_name, db_data, redirect_url );
+    
 });
 
 /******************************* END OF POST REQUEST *******************************/
@@ -144,7 +177,7 @@ function insert_into_db(req, res)
       var collection = db.collection(collection_name);
       //Insert Statement into mongodb
       collection.insert([db_data], function (err,result) {
-      //_id of last insert record
+      //_id of record inserted
       _id = result.ops[0]._id;
         //console.log();
         

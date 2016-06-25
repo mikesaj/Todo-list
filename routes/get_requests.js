@@ -53,6 +53,7 @@ router.get('/Profile',function (req,res) {
 });
 
 
+
 /* Route: Details
 Routing get request for '/Details' link route */
 router.get('/map',function (req,res) {

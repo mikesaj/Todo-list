@@ -6,7 +6,7 @@ block content
     .row
        .panel.panel-default
             .panel-heading
-              h3.panel-title Dhruv Patel
+              h3.panel-title #{user_data.first_name} #{user_data.last_name}
             |             
             .panel-body
               .row
@@ -15,9 +15,9 @@ block content
                
                 .col-md-9.col-lg-9
                     hr
-                    P TASK:
+                    P First Name: #{user_data.first_name}
                     hr
-                    P DATE/TIME:
+                    P Last Name: #{user_data.last_name}
                     hr
-                    P LOCATION:
+                    P Email: #{user_data.email}
                     hr
