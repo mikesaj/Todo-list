@@ -55,8 +55,8 @@ function get_db_data(collection_name, query_obj, callback)
 
 }
 
-/******************************* INSERT TO DB FUNCTION *******************************/
-function insert_into_db(req, res)
+/*** INSERT INTO DB FUNCTION ***/
+function insert_into_db(collection_name, db_data, callback)
 {
   //MongoDB connection function
   MongoClient.connect(url, function(err,db) {  
@@ -70,16 +70,14 @@ function insert_into_db(req, res)
       var collection = db.collection(collection_name);
       //Insert Statement into mongodb
       collection.insert([db_data], function (err,result) {
-      //_id of record inserted
-      _id = result.ops[0]._id;
-        //console.log();
-        
         
         if(err){
-          console.log(err);
+          // null callback if error occurs during insert operation
+          callback(null);
         }
         else{
-         res.redirect(redirect_url);
+         // callback result, if insert statement was successful
+          callback(result);
         }
         db.close();
       });
@@ -110,9 +108,8 @@ module.exports = {
   },
   get_todo_list: function(id, cb) {
 
-
-      var objectId = new mongodb.ObjectID(id);
-      //var objectId =id;
+    // Convert 'int' datatype into mongodb-objectId
+    var objectId = new mongodb.ObjectID(id);
 
     var collection_name = "todo_list"; /* todo_list Collection */
 
@@ -122,6 +119,17 @@ module.exports = {
     get_db_data(collection_name, query_obj, function (result) {
           cb(result);
     }); 
+  },
+  add_new_user: function(newUserData, cb) {
+    
+    // insert user into db
+    var collection_name = "users"; /* users collection */
+    insert_into_db(collection_name, newUserData, function (result) {
+          //cb(result);
+          var res = result.ops[0];
+          //console.log( res);
+          cb(res);
+    });  
   }
 }
 

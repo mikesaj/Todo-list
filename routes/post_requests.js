@@ -130,14 +130,33 @@ router.post('/adduser', function(req, res) {
 
   // JSON data 
   db_data = { 
+    email:req.body.email, 
     first_name: req.body.first_name, 
     last_name:req.body.last_name, 
-    email:req.body.email 
+    password:req.body.password 
   };
         
-  redirect_url = "new_todo_item";
+  //redirect_url = "new_todo_item";
   collection_name = "users";
-  insert_into_db(req, res);
+  //insert_into_db(req, res);
+
+  session_model.add_new_user(db_data, function (user_data){
+    if(user_data==null){
+      // redirect, if returned data is null
+      res.redirect("/Sign_In");
+    }
+    else{
+
+        // Save into session 'user_data' variable
+        user_data.id=user_data._id;
+        req.session.user_data = user_data;
+
+      console.dir(user_data._id);
+      //_id = user_data.id;
+      res.render('Profile', {title: 'Profile Page', user_data: user_data});
+      // redirect if user_data contains data
+    }
+  });
   
 });
 

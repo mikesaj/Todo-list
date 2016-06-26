@@ -49,7 +49,7 @@ router.get('/Sign_In',function (req,res) {
 /* Route: Profile
 Routing get request for '/Profile' link route */
 router.get('/Profile',function (req,res) {
-  res.render('profile', {title: 'Profile Page'});
+  res.render('profile', {title: 'Profile Page', user_data:req.session.user_data});
 });
 
 
