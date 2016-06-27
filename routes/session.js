@@ -93,13 +93,16 @@ module.exports = {
 
   /* @Return boolean
    * Verifies Username*/
-  login: function(username, cb) {
+  login: function(username,password, cb) {
 
     // Users Collection
     var collection_name = "users";
 
     // Mongo query contraint
-    var query_obj = {email: username};
+    var query_obj = {
+      email: username,
+      password: password
+    };
 
     // get data from db
     get_db_data(collection_name, query_obj, function (result) {

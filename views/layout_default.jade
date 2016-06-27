@@ -1,0 +1,34 @@
+//
+  * layout.jade
+  * This file conatins the layout template for this project
+  * Assignment By:
+  *  -Michael Sajuyigbe: 7434350
+  *  -Dhruvkumar Patel: 7453756
+doctype html
+html
+  head
+    title= title
+   
+    // CSS stylesheets
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Permanent+Marker', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Raleway', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css')
+    link(rel="icon", href="images/favicon.ico", type="image/x-icon")
+
+    // jQuery
+    script(src='/javascripts/jquery.js')
+    // Bootstrap Core JavaScript
+    script(src='/javascripts/bootstrap.min.js')
+
+  body
+     include header_default
+     .container
+      .row
+        .col-xs-12
+          //Page title
+          //h2= title     
+          
+     block content
+     include footer                    

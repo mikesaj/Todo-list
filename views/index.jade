@@ -4,7 +4,7 @@
   * Assignment By:
   *  -Michael Sajuyigbe: 7434350
   *  -Dhruvkumar Patel: 7453756
-extends layout
+extends layout_default
 
 block content
     
@@ -12,15 +12,17 @@ block content
     .container
       // Jumbotron Header
       header.jumbotron.hero-spacer
+        //Page title
+        h2= title        
         h3 A Warm Welcome!
         |             
         p
           | Give your list, We will remember it.
         |             
         p
-          a.btn.btn-primary.btn-large(href='Create_Account') SIGN UP
+          a.btn.btn-primary.btn-large(href='Create_Account') JOIN OUR GANG
           |&nbsp
-          a.btn.btn-primary.btn-large(href='Sign_In') SIGN IN
+          a.btn.btn-primary.btn-large(href='Sign_In') MAKE THE LIST
           
       |         
       hr

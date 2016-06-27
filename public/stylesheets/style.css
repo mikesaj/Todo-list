@@ -10,26 +10,25 @@ body {
     padding-top: 70px; 
     overflow:hidden; 
     overflow-y:scroll;
-}
-
-#feedback{
-    color: #F35353;
-    font-weight: bold;  
-    padding-left: 25px;
-    display: none;  
+   
 }
 
 .hero-spacer {
     margin-top: 50px;
     font-family: 'Permanent Marker', cursive;
+    
 }
 
 .hero-feature {
     margin-bottom: 30px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;;
+  
 }
 
 footer {
     margin: 50px 0;
+    font-family: 'Permanent Marker', cursive;
 }
 
 col-lg-12 .h3 { 
@@ -40,4 +39,17 @@ col-lg-12 .h3 {
 h3.panel-title {
     font-family: 'Raleway', sans-serif;
     
+}
+
+.nav.navbar-nav{
+
+font-family:  'Permanent Marker', cursive;
+
+}
+/* style class for ajax feel in  makelist page*/
+#feedback{
+    color: #F35353;
+    font-weight: bold;  
+    padding-left: 25px;
+    display: none;  
 }

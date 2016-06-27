@@ -80,17 +80,18 @@ router.get('/dashboard',function (req,res) {
 });
 
 
-/* Route: Sign_In
-Routing get request for '/Sign_In' link route */
+/* Route: profile
+Routing get request for '/profile' link route from user login*/
 router.post('/profile',function (req,res) {
   
   /* Json data */
 
-email = req.body.email;
+var email = req.body.email;
+var password = req.body.password;
 
 
 
-  session_model.login(email, function(result) {
+  session_model.login(email, password, function(result) {
     
     // Get the lenght of the result
     var resultLen = Object.keys(result).length;
@@ -116,6 +117,7 @@ email = req.body.email;
     }
     else{ 
       // return user to sign-in page
+      console.log("invalid username/password");
       res.render('signin', {title: 'Sign In'});  
     }
   

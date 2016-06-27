@@ -4,14 +4,15 @@
   * Assignment By:
   *  -Michael Sajuyigbe: 7434350
   *  -Dhruvkumar Patel: 7453756
-extends layout
+extends layout_default
 
 block content
     
     .container
+      //Page title
+      h2= title        
       
       hr
-      // Title
       .row
         .col-lg-6
           img(src='images/bg2.png', alt='')
@@ -53,5 +54,5 @@ block content
                         input.form-control(type='text', placeholder='Enter Password again' required)
                         |                                              
                         br
-                        button.btn-lg.btn-warning.btn-block(type='submit') CREATE ACCOUNT                         
+                        button.btn-lg.btn-warning.btn-block(type='submit') JOIN                      
                         //End of form
