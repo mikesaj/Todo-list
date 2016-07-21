@@ -53,3 +53,8 @@ font-family:  'Permanent Marker', cursive;
     padding-left: 25px;
     display: none;  
 }
+
+/* map */
+#map{
+    height:600px;
+}

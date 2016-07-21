@@ -10,6 +10,8 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 
+// session function
+var session_model = require("./session.js");
 
 
 // Variable declaration
@@ -45,6 +47,16 @@ router.get('/Sign_In',function (req,res) {
   res.render('signin', {title: 'Sign In'});
 });
 
+/* Route: Signout 
+Routing get request for '/exit_app' link route */
+router.get('/exit_app',function (req,res) {
+  //Destroys session data and redirect to home oage
+  req.session.destroy(function(err) {
+  	//Redirect to home page
+    res.redirect('/');    
+  })
+  
+});
 
 /* Route: Profile
 Routing get request for '/Profile' link route */
@@ -57,7 +69,40 @@ router.get('/Profile',function (req,res) {
 /* Route: Details
 Routing get request for '/Details' link route */
 router.get('/map',function (req,res) {
-  res.render('details', {title: 'Todo Event'});
+  var tagid = req.query.tagid;
+
+    session_model.get_todo_item(tagid, function(result) {
+    
+    // Get the lenght of the result
+    var resultLen = Object.keys(result).length;
+
+    // Check if result has data
+    if(resultLen > 0){
+
+        var query_result = result[0];
+
+        //Session Data
+        var user_data = {
+          title: query_result.title,
+          date: query_result.date,         
+          location: query_result.location,   
+          notes: query_result.notes        
+        }
+
+
+      // Get current todo-list by tagid
+      res.render('details', {title: 'Todo Event', todo_item: user_data});
+
+
+      console.dir( query_result._id +" ##vv" );
+    }
+
+
+    });
+
+
+
+
 });
 
 /* Route: Json_data

@@ -45,9 +45,11 @@ block content
                    .panel-body
                     .list-group#todo_list
                         each todo_item, i in todo_list
-                            a.list-group-item(href='#')
+                            a.list-group-item(href='map?tagid=#{todo_item._id}')
                                 i.fa.fa-money.fa-fw
                                 |  #{todo_item.title}
                                 |                                     
                                 span.pull-right.text-muted.small
                                     em #{todo_item.date}
+    // Auto Complete Geocode Api library                                    
+    script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&key=AIzaSyDbDbO6yO_piOMux3bXl3-A62OwsjctAIc')

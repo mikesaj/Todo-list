@@ -133,6 +133,21 @@ module.exports = {
           //console.log( res);
           cb(res);
     });  
+  },
+  get_todo_item: function(id, cb) {
+
+    // Convert 'int' datatype into mongodb-objectId
+    var objectId = new mongodb.ObjectID(id);
+
+    var collection_name = "todo_list"; /* todo_list Collection */
+
+    var query_obj = {_id: objectId}; /* Mongo query constraint */
+
+    // get data from db
+    get_db_data(collection_name, query_obj, function (result) {
+      //console.dir(result);
+          cb(result);
+    }); 
   }
 }
 
